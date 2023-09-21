@@ -1,0 +1,13 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: my-argo-workflows
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/shreyasri4/argo
+    path: argo
+    targetRevision: main
+  destination:
+    server: http://localhost:8080
+    namespace: my-namespace

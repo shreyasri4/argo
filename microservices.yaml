@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: microservices-workflow-
+spec:
+  entrypoint: deploy-microservices
+  templates:
+    - name: deploy-microservices
+      steps:
+        - - name: deploy-microservice-a
+            template: deploy-microservice-a
+        - - name: deploy-microservice-b
+            template: deploy-microservice-b
+    - name: deploy-microservice-a
+      container:
+        image: shreyasri12/myapp:latest
+        command: ["/bin/sh", "-c"]
+        args:
+          - echo "Deploying Microservice A..."
+    - name: deploy-microservice-b
+      container:
+        image: shreyasri12/myapp:python
+        command: ["/bin/sh", "-c"]
+        args:
+          - echo "Deploying Microservice B..."
